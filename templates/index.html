@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magia Eterna</title>
+    <link rel="stylesheet" href="../static/css/estiloindex.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-wand-magic-sparkles"></i></h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <a href="{{ url_for('busqueda') }}">Buscar</a>
+            <a href="{{ url_for('registro') }}">Registro</a>
+        </nav>
+    </header>
+    <section class="Home">
+        <div class="text-box">
+            <h1>Magia <span>Eterna</span></h1>
+            <p>El destino de la magia está en tus manos.<br>Avalado por la Ley de los Ciclos<p>
+            <button class="btn" type="button" onclick="window.location.href='busqueda'">Iniciar</button>
+
+        </div>
+        <img src="https://i.pinimg.com/736x/80/4c/22/804c22a6e47d9fe1ae1bd9bd4b2de314.jpg" alt="magia jajajajaj">
+    </section>
+</body>
+</html>

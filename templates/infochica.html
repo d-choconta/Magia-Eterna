@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información de {{ chica.nombre }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estiloinfochica.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Magia Eterna</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Inicio</a>
+      <a href="{{ url_for('busqueda') }}">Buscar</a>
+      <a href="{{ url_for('registro') }}">Registro</a>
+    </nav>
+  </header>
+
+  <section class="info-chica">
+    <h2 class="titulo-info">Información de la Chica Mágica</h2>
+
+    {% if chica %}
+        <div class="chica-container">
+            
+            <div class="chica-img">
+                <img src="{{ url_for('static', filename='img/2.png') }}" alt="Chica mágica">
+            </div>
+
+            <div class="chica-info">
+                <h3>Nombre: {{ chica['nombre'] }}</h3>
+                <p><strong>Edad:</strong> {{ chica['edad'] }} años</p>
+                <p><strong>Ciudad de origen:</strong> {{ chica['ciudad'] }}</p>
+                <p><strong>Estado:</strong> <span id="estado-actual">{{ chica['estado'] }}</span></p>
+                <p><strong>Fecha de contrato:</strong> {{ chica['fecha_contrato'] }}</p>
+            
+                
+                <form action="{{ url_for('actualizar_estado', chica_id=chica['id']) }}" method="POST">
+                    <label for="nuevo-estado">Actualizar Estado:</label>
+                    <select name="nuevo_estado" id="nuevo-estado">
+                        <option value="activa" {% if chica['estado'] == 'activa' %}selected{% endif %}>Activa</option>
+                        <option value="desaparecida" {% if chica['estado'] == 'desaparecida' %}selected{% endif %}>Desaparecida</option>
+                        <option value="rescatada" {% if chica['estado'] == 'rescatada' %}selected{% endif %}>Rescatada</option>
+                    </select>
+                    <button type="submit" class="btn">Actualizar</button>
+                </form>
+                
+                <form action="{{ url_for('eliminar_chica', chica_id=chica.id) }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <p>No se encontró información de la chica mágica.</p>
+    {% endif %}
+</section>
+  </section>
+</body>
+</html>

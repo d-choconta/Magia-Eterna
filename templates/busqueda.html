@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magia Eterna</title>
+    <link rel="stylesheet" href="../static/css/estiloindex.css">
+    <link rel="stylesheet" href="../static/css/estilobusqueda.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-wand-magic-sparkles"></i></h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <a href="{{ url_for('busqueda') }}">Buscar</a>
+            <a href="{{ url_for('registro') }}">Registro</a>
+        </nav>
+    </header>
+    <h1 class="magia">Chica Mágica</h1>
+    <form method="GET" action="{{ url_for('busqueda') }}" class="search-bar">
+        <select name="estado" onchange="this.form.submit()">
+            <option value="">Filtrar por estado</option>
+            <option value="activa" {% if request.args.get('estado') == 'activa' %}selected{% endif %}>Activa</option>
+            <option value="desaparecida" {% if request.args.get('estado') == 'desaparecida' %}selected{% endif %}>Desaparecida</option>
+            <option value="rescatada" {% if request.args.get('estado') == 'rescatada' %}selected{% endif %}>Rescatada</option>
+        </select>
+    </form>
+    
+    
+    <section class="container top-actores">
+        <h1 class="heading-1">Chicas magicas encontradas</h1>
+        <div class="container-actores">
+            {% if chicas %}
+                {% for chica in chicas %}
+                    <a href="{{ url_for('infochica', chica_id=chica['id']) }}" class="card-actor">
+                        <div class="container-img">
+                            <img src="{{ url_for('static', filename='img/2.png') }}" alt="{{ chica['nombre'] }}" />
+                        </div>
+                        <div class="recomen">
+                            <h1>{{ chica['nombre'] }}</h1>
+                            <h2>{{ chica['edad'] }} años</h2>
+                            <h3>{{ chica['ciudad_origen'] }}</h3>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>No hay chicas mágicas disponibles en este momento.</p>
+            {% endif %}
+        </div>
+                      
+    </section>
+    
+</body>
+</html>
+
+
+
+	

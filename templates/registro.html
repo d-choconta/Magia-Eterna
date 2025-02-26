@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magia Eterna</title>
+    <link rel="stylesheet" href="../static/css/estiloindex.css">
+    <link rel="stylesheet" href="../static/css/estiloregistro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-wand-magic-sparkles"></i></h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <a href="{{ url_for('busqueda') }}">Buscar</a>
+            <a href="{{ url_for('registro') }}">Registro</a>
+        </nav>
+    </header>
+    <div class="contenedor">
+        <div class="titulo">Registro de Chica Mágica</div>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <form method="POST" action="{{ url_for('registro') }}">
+            <div class="usuario-detalles">
+                <div class="input-box">
+                    <span class="detalles">Nombre completo</span>
+                    <input type="text" name="nombre" placeholder="Introduce el nombre" required>
+                </div>
+                <div class="input-box">
+                    <span class="detalles">Edad</span>
+                    <input type="number" name="edad" placeholder="Introduce la edad" required>
+                </div>
+                <div class="input-box">
+                    <span class="detalles">Ciudad de origen</span>
+                    <input type="text" name="ciudad_origen" placeholder="Introduce la Ciudad" required>
+                </div>
+                <div class="detalles-estados">
+                    <span class="detalles-estados">Estado actual</span>
+                    <select name="estado" required>
+                        <option value="" disabled selected>Selecciona un estado</option>
+                        <option value="activa">Activa</option>
+                        <option value="desaparecida">Desaparecida</option>
+                        <option value="rescatada">Rescatada por la Ley de los Ciclos</option>
+                    </select>
+                </div>
+                <div class="fecha-contrato">
+                    <label for="fechaContrato">Fecha de contrato:</label>
+                    <input type="date" name="fecha_contrato" required>
+                </div>
+                <div class="input-box">
+                    <button type="submit">Registrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <section class="jajaja">
+        <img src="{{ url_for('static', filename='img/1.png') }}" alt="Imagen local" width="300">
+    </section>
+</body>
+</html>
