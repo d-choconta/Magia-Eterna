@@ -138,16 +138,12 @@ def infochica(chica_id):
 @app.route('/actualizar_estado/<int:chica_id>', methods=['POST'])
 def actualizar_estado(chica_id):
     nuevo_estado = request.form.get("nuevo_estado")
-    if not nuevo_estado:
-        return "Error: No se recibió un estado válido", 400
 
     conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute("SELECT estado FROM contrato WHERE chica_id = %s", (chica_id,))
     estado_actual = cursor.fetchone()
-    if not estado_actual:
-        return "Error: No se encontró contrato", 404
 
     cursor.execute("UPDATE contrato SET estado = %s WHERE chica_id = %s", (nuevo_estado, chica_id))
     cursor.execute("INSERT INTO historial_cambios (chica_id, estado_anterior, estado_nuevo) VALUES (%s, %s, %s)", 
